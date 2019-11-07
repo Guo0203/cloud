@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gpf.provider.dao.EmployeeDao" >
+
+    <resultMap id="emp" type="com.gpf.api.entities.Employee">
+        <!-- 主键必须用id标签映射，其他的用非集合用result映射 集合类用collection映射 -->
+        <!-- column为数据库字段名,property为实体类属性名 -->
+        <result column="emp_name" property="empName" />
+        <result column="work_date" property="workDate" />
+    </resultMap>
+
+    <sql id="BASE_COLUMN">
+		emp_name,email,gender,department,birth,work_date
+	</sql>
+
+    <select id="findById" resultMap="emp" parameterType="Integer">
+      select id,<include refid="BASE_COLUMN"/> from employee where id = #{id}
+    </select>
+
+    <select id="findAll" resultMap="emp">
+        select id,<include refid="BASE_COLUMN"/> from employee order by id
+    </select>
+
+    <insert id="addEmployee" parameterType="Employee">
+        insert into employee(<include refid="BASE_COLUMN"/>) values (#{empName},#{email},#{gender},#{department},#{birth},#{workDate})
+    </insert>
+</mapper>

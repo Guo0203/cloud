@@ -1,0 +1,27 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: CLOUDPROVIDER-HYSTRIX-8082
+  #返回json数据时过滤掉null值
+  jackson:
+    default-property-inclusion: non_null
+
+#eureka配置
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://localhost:8000/eureka
+      defaultZone: http://127.0.0.1:8000/eureka/,http://172.16.1.36:8001/eureka/
+  instance:
+    instance-id: CLOUDPROVIDER-HYSTRIX-8082 #服务名称
+    prefer-ip-address: true #访问路径显示ip地址
+
+
+info:
+  app.name: gpf-springcloud
+  company.name: xingsibo
+  build.artifactId: cloud-provider-hystrix
+  build.version: 1.0-SNAPSHOT
+
